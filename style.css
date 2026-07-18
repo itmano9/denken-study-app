@@ -1,0 +1,237 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #1f2430;
+  --text-muted: #5b6472;
+  --accent: #2563eb;
+  --accent-soft: #e8f0fe;
+  --border: #e2e5ea;
+  --correct: #1a8f4c;
+  --radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1e2126;
+    --text: #eceef1;
+    --text-muted: #a3abb8;
+    --accent: #6d9bff;
+    --accent-soft: #22314f;
+    --border: #2c3038;
+    --correct: #4fd487;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+  z-index: 10;
+}
+
+.app-title {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.app-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.app-footer {
+  max-width: 720px;
+  margin: 24px auto 40px;
+  padding: 0 16px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.app-footer a { color: var(--accent); }
+
+/* ジャンル一覧 */
+.genre-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.genre-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.genre-card:hover { border-color: var(--accent); }
+
+.genre-card h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.genre-card p {
+  margin: 0 0 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.genre-card .count {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* ジャンル詳細 */
+.back-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.genre-heading {
+  margin: 4px 0 12px;
+}
+
+.basics-box {
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 24px;
+  white-space: pre-wrap;
+}
+
+.basics-box h4 {
+  margin-top: 0;
+}
+
+.question-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.question-card .year-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.question-statement {
+  white-space: pre-wrap;
+  margin-bottom: 10px;
+}
+
+.choice-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.choice-list li {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.choice-list li.is-correct {
+  border-color: var(--correct);
+  color: var(--correct);
+  font-weight: 700;
+}
+
+.question-diagram {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 4px 0 12px;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.choice-list-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.choice-list-images li {
+  padding: 8px;
+}
+
+.choice-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.answer-label .choice-img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 220px;
+  margin-left: 6px;
+}
+
+.reveal-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.reveal-btn:active { opacity: 0.85; }
+
+.answer-box {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  display: none;
+}
+
+.answer-box.is-visible { display: block; }
+
+.answer-box .answer-label {
+  font-weight: 700;
+  color: var(--correct);
+  margin-bottom: 6px;
+}
+
+.explanation {
+  white-space: pre-wrap;
+  color: var(--text);
+}
