@@ -55,8 +55,16 @@ function renderGenreDetail(genreId) {
         })
         .join("");
 
+      const labelsHtml = (q.diagram && q.diagram.labels)
+        ? q.diagram.labels
+            .map((l) => `<span class="node-label" style="left:${l.x}%;top:${l.y}%;">${escapeHtml(l.text)}</span>`)
+            .join("")
+        : "";
       const diagramHtml = q.diagram
-        ? `<img class="question-diagram" src="${escapeHtml(q.diagram.src)}" alt="${escapeHtml(q.diagram.alt || "問題の図")}">`
+        ? `<div class="diagram-wrap" id="diagram-${idx}">
+             <img class="question-diagram" src="${escapeHtml(q.diagram.src)}" alt="${escapeHtml(q.diagram.alt || "問題の図")}">
+             ${labelsHtml}
+           </div>`
         : "";
 
       const answerChoice = q.choices[q.answer];
@@ -70,7 +78,7 @@ function renderGenreDetail(genreId) {
           <p class="question-statement">${escapeHtml(q.statement)}</p>
           ${diagramHtml}
           <ul class="choice-list${hasImageChoices ? " choice-list-images" : ""}" id="choices-${idx}">${choicesHtml}</ul>
-          <button class="reveal-btn" data-target="answer-${idx}" data-choices="choices-${idx}">解答・解説を見る</button>
+          <button class="reveal-btn" data-target="answer-${idx}" data-choices="choices-${idx}" data-diagram="diagram-${idx}">解答・解説を見る</button>
           <div class="answer-box" id="answer-${idx}">
             <p class="answer-label">正解: (${q.answer + 1}) ${answerContentHtml}</p>
             <p class="explanation">${escapeHtml(q.explanation)}</p>
@@ -97,13 +105,16 @@ function renderGenreDetail(genreId) {
       const isVisible = answerBox.classList.toggle("is-visible");
       btn.textContent = isVisible ? "解答・解説を隠す" : "解答・解説を見る";
 
-      if (isVisible) {
-        document.querySelectorAll(`#${btn.dataset.choices} li`).forEach((li) => {
-          if (li.dataset.correct === "true") {
-            li.classList.add("is-correct");
-          }
-        });
+      const diagramWrap = document.getElementById(btn.dataset.diagram);
+      if (diagramWrap) {
+        diagramWrap.classList.toggle("labels-visible", isVisible);
       }
+
+      document.querySelectorAll(`#${btn.dataset.choices} li`).forEach((li) => {
+        if (li.dataset.correct === "true") {
+          li.classList.toggle("is-correct", isVisible);
+        }
+      });
     });
   });
 }
@@ -117,7 +128,16 @@ function render() {
   } else {
     renderGenreList();
   }
+  renderMath();
   window.scrollTo(0, 0);
+}
+
+function renderMath() {
+  if (typeof renderMathInElement !== "function") return;
+  renderMathInElement(appEl, {
+    delimiters: [{ left: "$", right: "$", display: false }],
+    throwOnError: false,
+  });
 }
 
 window.addEventListener("hashchange", render);

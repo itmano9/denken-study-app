@@ -235,3 +235,53 @@ body {
   white-space: pre-wrap;
   color: var(--text);
 }
+
+/* KaTeX 数式 */
+.katex {
+  color: inherit;
+  font-size: 1.05em;
+}
+
+.katex-display {
+  margin: 0.4em 0;
+}
+
+/* 回路図の節点ラベル */
+.diagram-wrap {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 4px 0 12px;
+}
+
+.diagram-wrap .question-diagram {
+  margin: 0;
+}
+
+.node-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px var(--surface);
+  pointer-events: none;
+}
+
+.diagram-wrap.labels-visible .node-label {
+  opacity: 1;
+  visibility: visible;
+}
