@@ -5,4 +5,5 @@ const QUESTIONS = [
   ...BATCH_R1_R3,
   ...BATCH_R4F_R6S,
   ...BATCH_R7F_R7S,
+  ...BATCH_AC,
 ];
