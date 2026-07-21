@@ -6,4 +6,5 @@ const QUESTIONS = [
   ...BATCH_R4F_R6S,
   ...BATCH_R7F_R7S,
   ...BATCH_AC,
+  ...BATCH_THREE_PHASE,
 ];
